@@ -89,4 +89,25 @@ void opcontrol() {
 	// 	right_mtr = right;
 	// 	pros::delay(20);
 	// }
+
+	Motor leftFront = 1_mtr;
+	Motor leftBack = 10_mtr;
+	Motor rightFront = 11_rmtr;
+	Motor rightBack = 20_rmtr;
+	Controller master;
+
+	while (true) {
+		
+		float forward = master.getAnalog(ControllerAnalog::leftY);
+		float sideways = master.getAnalog(ControllerAnalog::leftX);
+		float turn = master.getAnalog(ControllerAnalog::rightX);
+
+		
+
+		leftFront.controllerSet(sideways + forward + turn);
+		leftBack.controllerSet(sideways - forward + turn);
+		rightFront.controllerSet(sideways - forward - turn);
+		rightBack.controllerSet(sideways + forward - turn);
+
+	}
 }
